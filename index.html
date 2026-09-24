@@ -1,0 +1,490 @@
+<title>Đường tới TOEIC 700</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+
+<style>
+:root{
+  color-scheme: light;
+  --paper:#F1F3EF;
+  --card:#FFFFFF;
+  --card-2:#E9EDE8;
+  --ink:#181C1A;
+  --ink-2:#5A6663;
+  --ink-3:#8A948F;
+  --rule:#D7DCD6;
+  --rule-2:#BFC7BF;
+  --accent:#1D4E5C;
+  --accent-soft:#DCE9EC;
+  --correct:#2E6B41;
+  --correct-soft:#DDECE0;
+  --wrong:#A32E28;
+  --wrong-soft:#F4DEDC;
+  --shadow:0 1px 2px rgba(24,32,28,.05), 0 10px 28px -20px rgba(24,32,28,.35);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --paper:#0F1312; --card:#171C1A; --card-2:#1E2522;
+    --ink:#E7EBE7; --ink-2:#9BA6A1; --ink-3:#77827D;
+    --rule:#29312E; --rule-2:#3A443F;
+    --accent:#56B8CE; --accent-soft:#16333B;
+    --correct:#64BE7C; --correct-soft:#16301F;
+    --wrong:#E88B84; --wrong-soft:#33201E;
+    --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 28px -20px rgba(0,0,0,.9);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --paper:#0F1312; --card:#171C1A; --card-2:#1E2522;
+  --ink:#E7EBE7; --ink-2:#9BA6A1; --ink-3:#77827D;
+  --rule:#29312E; --rule-2:#3A443F;
+  --accent:#56B8CE; --accent-soft:#16333B;
+  --correct:#64BE7C; --correct-soft:#16301F;
+  --wrong:#E88B84; --wrong-soft:#33201E;
+  --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 28px -20px rgba(0,0,0,.9);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:15px; line-height:1.6; margin:0;
+  -webkit-font-smoothing:antialiased;
+}
+.mono{font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace;font-variant-numeric:tabular-nums}
+.serif{font-family:"Source Serif 4",Georgia,"Times New Roman",serif}
+
+/* ---------------- top bar ---------------- */
+header{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:20;
+  background:color-mix(in srgb, var(--paper) 92%, transparent);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--rule);
+}
+.bar{
+  max-width:720px; margin:0 auto; padding:10px 16px;
+  display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+}
+.brand{font-weight:700; font-size:14.5px; letter-spacing:-.01em; margin-right:auto}
+.brand span{color:var(--accent)}
+.stat{
+  font-family:"IBM Plex Mono",monospace; font-size:12.5px; color:var(--ink-2);
+  font-variant-numeric:tabular-nums; white-space:nowrap;
+}
+.stat b{color:var(--ink); font-weight:600}
+.progress{height:3px; background:var(--rule); width:100%}
+.progress i{display:block; height:100%; background:var(--accent); width:0; transition:width .25s ease}
+
+/* ---------------- layout ---------------- */
+main{max-width:720px; margin:0 auto; padding:24px 16px 72px}
+.modes{display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap}
+.mode{
+  font:inherit; font-size:13px; font-weight:500; cursor:pointer;
+  padding:7px 14px; border-radius:999px; border:1px solid var(--rule-2);
+  background:transparent; color:var(--ink-2);
+}
+.mode[aria-pressed="true"]{background:var(--accent); border-color:var(--accent); color:var(--paper)}
+.mode:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+
+/* ---------------- question ---------------- */
+.qcard{background:var(--card); border:1px solid var(--rule); box-shadow:var(--shadow); padding:22px 22px 20px}
+.qhead{display:flex; align-items:baseline; gap:10px; margin-bottom:4px}
+.qnum{
+  font-family:"IBM Plex Mono",monospace; font-size:12px; font-weight:600;
+  color:var(--accent); letter-spacing:.06em;
+}
+.qtag{
+  font-size:11px; color:var(--ink-3); border:1px solid var(--rule); border-radius:3px;
+  padding:1px 7px; margin-left:auto; white-space:nowrap;
+}
+.stem{
+  font-family:"Source Serif 4",Georgia,serif; font-size:18px; line-height:1.55;
+  color:var(--ink); margin:8px 0 18px; text-wrap:pretty;
+}
+.stem u{text-decoration:none; border-bottom:1.5px solid var(--rule-2); padding:0 22px}
+
+.passage{
+  font-family:"Source Serif 4",Georgia,serif; font-size:15.5px; line-height:1.7;
+  background:var(--card-2); border-left:2px solid var(--rule-2);
+  padding:14px 16px; margin:0 0 18px; white-space:pre-wrap;
+}
+.passage b{background:var(--accent-soft); color:var(--accent); padding:0 5px; border-radius:2px; font-weight:600}
+.passage i{
+  font-style:normal; font-family:"IBM Plex Mono",monospace; font-size:12px;
+  color:var(--accent); border:1px solid var(--rule-2); border-radius:3px;
+  padding:0 4px; margin-right:3px;
+}
+.plabel{
+  font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--ink-3); margin:0 0 5px;
+}
+.plabel + .passage{margin-top:0}
+.pair{margin-bottom:18px}
+.pair .passage{margin-bottom:12px}
+
+.opts{display:grid; gap:7px}
+.opt{
+  display:flex; align-items:flex-start; gap:11px; width:100%; text-align:left;
+  font:inherit; font-size:15.5px; cursor:pointer;
+  background:var(--card); border:1px solid var(--rule); border-radius:6px;
+  padding:11px 13px; color:var(--ink); transition:border-color .12s, background .12s;
+}
+.opt .letter{
+  flex:none; width:22px; height:22px; border-radius:50%;
+  border:1.5px solid var(--rule-2); display:grid; place-items:center;
+  font-family:"IBM Plex Mono",monospace; font-size:11.5px; font-weight:600;
+  color:var(--ink-2); margin-top:1px;
+}
+.opt .text{font-family:"Source Serif 4",Georgia,serif}
+.opt:not(:disabled):hover{border-color:var(--rule-2); background:var(--card-2)}
+.opt:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+.opt[data-state="correct"]{border-color:var(--correct); background:var(--correct-soft)}
+.opt[data-state="correct"] .letter{border-color:var(--correct); background:var(--correct); color:var(--card)}
+.opt[data-state="wrong"]{border-color:var(--wrong); background:var(--wrong-soft)}
+.opt[data-state="wrong"] .letter{border-color:var(--wrong); background:var(--wrong); color:var(--card)}
+.opt[data-state="picked"]{border-color:var(--accent); background:var(--accent-soft)}
+.opt[data-state="picked"] .letter{border-color:var(--accent); background:var(--accent); color:var(--card)}
+.opt:disabled{cursor:default}
+
+.why{
+  margin-top:16px; padding-top:15px; border-top:1px dashed var(--rule);
+  font-size:14.5px; color:var(--ink-2);
+}
+.why .verdict{font-weight:700; font-size:13px; letter-spacing:.04em; text-transform:uppercase; margin-bottom:6px}
+.why.ok .verdict{color:var(--correct)}
+.why.no .verdict{color:var(--wrong)}
+.why p{margin:0}
+.why code{
+  font-family:"IBM Plex Mono",monospace; font-size:13px;
+  background:var(--card-2); padding:1px 5px; border-radius:3px; color:var(--ink);
+}
+
+.nav{display:flex; gap:10px; margin-top:18px; align-items:center; flex-wrap:wrap}
+.btn{
+  font:inherit; font-size:14px; font-weight:600; cursor:pointer;
+  padding:10px 20px; border-radius:6px; border:1px solid var(--accent);
+  background:var(--accent); color:var(--paper);
+}
+.btn.ghost{background:transparent; color:var(--ink-2); border-color:var(--rule-2)}
+.btn:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+.btn:disabled{opacity:.45; cursor:default}
+.hint{font-size:12.5px; color:var(--ink-3); margin-left:auto}
+kbd{
+  font-family:"IBM Plex Mono",monospace; font-size:11px; border:1px solid var(--rule-2);
+  border-bottom-width:2px; border-radius:4px; padding:1px 5px; color:var(--ink-2);
+}
+
+/* ---------------- weak areas ---------------- */
+.panel{margin-top:26px; background:var(--card); border:1px solid var(--rule); padding:20px 22px; box-shadow:var(--shadow)}
+.panel h2{
+  font-size:12px; letter-spacing:.13em; text-transform:uppercase; color:var(--ink-3);
+  margin:0 0 4px; font-weight:700;
+}
+.panel .sub{font-size:13px; color:var(--ink-3); margin:0 0 16px}
+.cats{display:grid; gap:9px}
+.cat{display:grid; grid-template-columns:minmax(96px,1.1fr) 1fr 58px; align-items:center; gap:12px}
+.cat-name{font-size:13.5px; color:var(--ink-2)}
+.track{height:7px; background:var(--rule); border-radius:999px; overflow:hidden}
+.track i{display:block; height:100%; background:var(--accent); border-radius:999px; width:0; transition:width .3s}
+.cat[data-weak="1"] .track i{background:var(--wrong)}
+.cat-val{font-family:"IBM Plex Mono",monospace; font-size:12.5px; color:var(--ink-2); text-align:right; font-variant-numeric:tabular-nums}
+.empty{font-size:13.5px; color:var(--ink-3)}
+
+.result{background:var(--accent-soft); border:1px solid var(--accent); padding:20px 22px; margin-top:26px}
+.result h2{font-family:"Source Serif 4",serif; font-size:20px; margin:0 0 6px; color:var(--ink)}
+.result .big{font-family:"IBM Plex Mono",monospace; font-size:34px; font-weight:600; color:var(--accent); line-height:1.1}
+.result p{margin:8px 0 0; font-size:14px; color:var(--ink-2); max-width:56ch}
+
+footer{max-width:720px; margin:0 auto; padding:0 16px 40px; font-size:12.5px; color:var(--ink-3); line-height:1.6}
+
+@media (max-width:520px){
+  .stem{font-size:17px}
+  .cat{grid-template-columns:1fr 54px; }
+  .cat .track{grid-column:1 / -1; order:3}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<header>
+  <div class="bar">
+    <div class="brand">Đường tới TOEIC <span>700</span></div>
+    <div class="stat">Câu <b id="s-pos">1</b>/<b id="s-total">64</b></div>
+    <div class="stat">Đúng <b id="s-right">0</b></div>
+    <div class="stat" id="s-timer-wrap" hidden>⏱ <b id="s-timer">40:00</b></div>
+  </div>
+  <div class="progress"><i id="bar"></i></div>
+</header>
+
+<main>
+  <div class="modes">
+    <button class="mode" id="m-practice" aria-pressed="true">Luyện tập — xem giải thích ngay</button>
+    <button class="mode" id="m-exam" aria-pressed="false">Thi thử — 40 phút, chấm cuối</button>
+    <button class="mode" id="m-reset" style="margin-left:auto">Xoá tiến độ</button>
+  </div>
+
+  <section class="qcard" id="card" aria-live="polite"></section>
+
+  <div class="nav">
+    <button class="btn" id="next">Câu tiếp theo</button>
+    <button class="btn ghost" id="skip">Bỏ qua</button>
+    <span class="hint"><kbd>A</kbd><kbd>B</kbd><kbd>C</kbd><kbd>D</kbd> chọn · <kbd>Enter</kbd> tiếp</span>
+  </div>
+
+  <section class="result" id="result" hidden></section>
+
+  <section class="panel">
+    <h2>Điểm yếu theo chủ điểm</h2>
+    <p class="sub">Thanh đỏ là chủ điểm dưới 70% — học lại trước khi thi.</p>
+    <div class="cats" id="cats"><p class="empty">Làm vài câu để xem thống kê.</p></div>
+  </section>
+</main>
+
+<footer>
+  64 câu Part 5, Part 6 và Part 7 soạn theo đúng định dạng TOEIC — không phải đề ETS thật.
+  Điểm ước lượng chỉ để theo dõi tiến bộ, không thay thế điểm thi chính thức.
+  Tiến độ lưu trên trình duyệt này.
+</footer>
+
+<script>
+/* Part 7 dùng chung một bài cho nhiều câu, nên tách riêng ra đây. */
+const PASSAGES = {
+A:[{l:"Email", t:"From: support@northgate-supply.com\nTo: j.mendes@brightline.co\nDate: 8 May\nSubject: Order #NG-44812\n\nDear Ms. Mendes,\n\nThank you for contacting us about order #NG-44812. I have reviewed your file and can confirm that the twelve ergonomic chairs you ordered on 28 April were dispatched from our Leeds warehouse on 3 May.\n\n—[1]— Unfortunately, our carrier has reported delays across the northern region following road closures, and your shipment is now expected to arrive on 12 May rather than the 7 May date shown on your confirmation.\n\n—[2]— I understand this delay is inconvenient, particularly as you mentioned the chairs are needed for your new office opening. As a gesture of goodwill, I have arranged a 15 percent credit on this order, which will appear on your next invoice.\n\n—[3]— If the revised date still does not work for you, we can cancel the order at no charge and issue a full refund within five business days. Simply reply to this message before 10 May.\n\n—[4]— Please accept my apologies for the disruption.\n\nKind regards,\nAmara Osei\nCustomer Support, Northgate Supply"}],
+
+B:[{l:"Thông báo", t:"BRIGHTLINE PROFESSIONAL DEVELOPMENT\nSpring Workshop Series\n\nAll staff are invited to register for the following sessions, held in the Ridgeway Building, Room 210.\n\nData Visualisation Basics — Tuesday 19 May, 09:00–12:00\nLed by Priya Raman. No prior experience required. Participants should bring a laptop.\n\nNegotiation for Project Leads — Thursday 21 May, 13:00–17:00\nLed by external consultant Tomás Ferreira. Open to staff at team-lead level and above. Limited to 15 participants.\n\nWritten Communication in English — Friday 22 May, 09:00–11:00\nLed by Priya Raman. Recommended for staff who correspond regularly with overseas clients.\n\nRegistration closes on 14 May. Employees must obtain their line manager's approval before registering. Sessions are free of charge, but staff who register and do not attend will be charged a £40 no-show fee to their department budget.\n\nTo register, complete the form on the staff intranet under Learning > Spring Series."}],
+
+C:[{l:"Bài 1 — Tin tuyển dụng", t:"MERIDIAN LOGISTICS — Junior Systems Analyst\nLocation: Bristol office (hybrid, three days on site)\nClosing date: 30 June\n\nWe are seeking a Junior Systems Analyst to join our operations technology team.\n\nRequirements:\n• A degree in computer science, information systems or a related field\n• At least one year of experience with relational databases (SQL Server or MySQL)\n• Familiarity with process documentation\n• Strong written English\n\nDesirable:\n• Experience with reporting tools such as Power BI\n• Knowledge of warehouse management systems\n\nSuccessful applicants will be invited to a two-stage interview: a technical assessment followed by a panel discussion. Candidates who do not hold a valid UK work permit should indicate this in their application.\n\nSend a CV and covering letter to recruitment@meridian-log.com quoting reference JSA-06."},
+   {l:"Bài 2 — Email ứng tuyển", t:"From: d.okonkwo@mailbox.net\nTo: recruitment@meridian-log.com\nDate: 21 June\nSubject: Application — reference JSA-06\n\nDear Hiring Team,\n\nI am writing to apply for the Junior Systems Analyst position advertised on your careers page.\n\nI completed a degree in information systems in 2024 and have spent the past eighteen months working with MySQL databases at a freight forwarding company, where I also wrote the process documentation for our new dispatch system. I have used Power BI to build weekly operations dashboards.\n\nI should mention that I am currently based in Manchester. I am willing to relocate to Bristol and can confirm I hold the right to work in the UK.\n\nMy CV is attached. I would be glad to complete any technical assessment at your convenience.\n\nYours faithfully,\nDaniel Okonkwo"}],
+};
+
+const Q = [
+/* ---- Word form ---- */
+{p:5,c:"Dạng từ",s:"The marketing team submitted a ___ proposal for the new product launch.",o:["detail","detailed","detailing","details"],a:1,e:"Trước danh từ <code>proposal</code> phải là tính từ. <code>detailed</code> = chi tiết. Đây là dạng câu chiếm nhiều nhất Part 5: nhìn vị trí trống rồi suy ra từ loại, không cần hiểu nghĩa cả câu."},
+{p:5,c:"Dạng từ",s:"All employees must complete the safety training ___.",o:["annual","annually","annuals","annualize"],a:1,e:"Chỗ trống bổ nghĩa cho động từ <code>complete</code> → cần trạng từ <code>annually</code>. Mẹo: đuôi <code>-ly</code> gần như luôn là trạng từ."},
+{p:5,c:"Dạng từ",s:"The committee's ___ of the budget proposal took three weeks.",o:["review","reviewed","reviewing","reviewer"],a:0,e:"Sau sở hữu cách <code>committee's</code> và trước <code>of</code> phải là danh từ. <code>reviewer</code> cũng là danh từ nhưng chỉ người — người thì không «kéo dài ba tuần» được."},
+{p:5,c:"Dạng từ",s:"Ms. Tanaka was praised for her ___ handling of the client complaint.",o:["profession","professional","professionally","professionalism"],a:1,e:"Kẹp giữa tính từ sở hữu <code>her</code> và danh từ <code>handling</code> → cần tính từ."},
+{p:5,c:"Dạng từ",s:"The new software has significantly improved the ___ of our billing process.",o:["efficient","efficiently","efficiency","efficiencies"],a:2,e:"Sau <code>the</code> và trước <code>of</code> → danh từ. <code>efficiency</code> là danh từ không đếm được nên không dùng số nhiều ở nghĩa này."},
+{p:5,c:"Dạng từ",s:"Customer ___ has risen by 12 percent since the redesign.",o:["satisfy","satisfied","satisfaction","satisfactory"],a:2,e:"Chỗ trống là chủ ngữ → danh từ. <code>Customer satisfaction</code> là cụm cố định hay gặp trong TOEIC."},
+/* ---- Verb ---- */
+{p:5,c:"Thì & thể",s:"By the time the auditors arrive, the finance team ___ all the reports.",o:["prepares","will have prepared","has prepared","is preparing"],a:1,e:"<code>By the time</code> + hiện tại đơn mang nghĩa tương lai → vế chính dùng tương lai hoàn thành: việc xong TRƯỚC khi kiểm toán tới."},
+{p:5,c:"Thì & thể",s:"The shipment ___ yesterday, but it has not arrived yet.",o:["sent","was sent","has sent","sending"],a:1,e:"<code>shipment</code> là vật, bị gửi chứ không tự gửi → bị động. Có <code>yesterday</code> nên dùng quá khứ đơn bị động."},
+{p:5,c:"Thì & thể",s:"Mr. Okafor ___ for this company since 2019.",o:["works","worked","has worked","will work"],a:2,e:"<code>since</code> + mốc thời gian → hiện tại hoàn thành. Dấu hiệu này gần như tuyệt đối trong TOEIC."},
+{p:5,c:"Thì & thể",s:"All maintenance requests ___ through the online portal.",o:["must submit","must be submitted","must submitting","must have submitted"],a:1,e:"<code>requests</code> được nộp chứ không tự nộp → <code>must be + V3</code>. Hỏi «chủ ngữ làm hay bị làm» là cách nhanh nhất để chọn thể."},
+{p:5,c:"Thì & thể",s:"If the supplier ___ the deadline, we will need to find an alternative.",o:["misses","will miss","missed","would miss"],a:0,e:"Điều kiện loại 1: <code>If + hiện tại đơn, will + V</code>. Không dùng <code>will</code> trong mệnh đề <code>if</code>."},
+{p:5,c:"Thì & thể",s:"The conference room ___ at the moment, so please use Room B.",o:["renovates","is renovating","is being renovated","has renovated"],a:2,e:"<code>at the moment</code> → tiếp diễn; phòng được sửa → bị động. Ghép lại: hiện tại tiếp diễn bị động <code>is being + V3</code>."},
+{p:5,c:"Thì & thể",s:"Ms. Alvarez ___ the department for five years before she was promoted.",o:["leads","has led","had led","will lead"],a:2,e:"Hành động xảy ra TRƯỚC một mốc quá khứ (<code>was promoted</code>) → quá khứ hoàn thành. Có <code>before</code> + quá khứ là dấu hiệu."},
+/* ---- Prepositions ---- */
+{p:5,c:"Giới từ",s:"The seminar will be held ___ March 14 at the downtown convention center.",o:["in","on","at","by"],a:1,e:"<code>on</code> + ngày cụ thể. Nhớ bộ ba: <code>in</code> + tháng/năm, <code>on</code> + ngày, <code>at</code> + giờ."},
+{p:5,c:"Giới từ",s:"Please return the completed form ___ Friday afternoon.",o:["until","by","since","during"],a:1,e:"<code>by</code> = hạn chót, xong trước hoặc đúng lúc đó. <code>until</code> nghĩa khác: kéo dài liên tục cho tới lúc đó."},
+{p:5,c:"Giới từ",s:"The new policy applies ___ all full-time employees.",o:["for","on","to","with"],a:2,e:"<code>apply to</code> = áp dụng cho. Phân biệt <code>apply for</code> = nộp đơn xin (việc, học bổng)."},
+{p:5,c:"Giới từ",s:"Sales have increased steadily ___ the past six months.",o:["since","during","while","from"],a:1,e:"<code>during</code> + khoảng thời gian (danh từ). <code>while</code> phải đi với mệnh đề có chủ ngữ và động từ."},
+{p:5,c:"Giới từ",s:"The technician is responsible ___ maintaining all laboratory equipment.",o:["of","to","for","with"],a:2,e:"<code>be responsible for</code> là cụm cố định. TOEIC rất hay hỏi các cặp tính từ + giới từ này."},
+{p:5,c:"Giới từ",s:"The report should be submitted ___ the end of the quarter.",o:["at","in","on","within"],a:0,e:"<code>at the end of</code> = vào cuối. Phân biệt <code>in the end</code> = cuối cùng thì (trạng ngữ, không có <code>of</code>)."},
+/* ---- Conjunctions ---- */
+{p:5,c:"Liên từ",s:"___ the delivery was delayed, the client agreed to extend the deadline.",o:["Despite","Although","However","In spite of"],a:1,e:"Sau chỗ trống là mệnh đề đủ chủ–vị → phải dùng liên từ <code>Although</code>. <code>Despite</code> và <code>In spite of</code> là giới từ (theo sau bởi danh từ); <code>However</code> là trạng từ, cần dấu chấm phẩy."},
+{p:5,c:"Liên từ",s:"The proposal was well prepared; ___, the board rejected it.",o:["therefore","moreover","nevertheless","so"],a:2,e:"Hai vế tương phản: chuẩn bị tốt NHƯNG bị bác. <code>nevertheless</code> = tuy vậy. <code>therefore</code> là nguyên nhân–kết quả, ngược nghĩa."},
+{p:5,c:"Liên từ",s:"The office will remain closed ___ the renovation is complete.",o:["during","until","by","while"],a:1,e:"<code>until</code> + mệnh đề = cho tới khi. <code>during</code> và <code>by</code> là giới từ, không đi với mệnh đề."},
+{p:5,c:"Liên từ",s:"___ he lacked formal training, Mr. Diaz quickly became the team's top performer.",o:["Because","Even though","So that","Unless"],a:1,e:"Thiếu đào tạo mà vẫn giỏi nhất → tương phản. <code>Because</code> sẽ thành vô lý về nghĩa."},
+{p:5,c:"Liên từ",s:"The vendor offered a discount ___ we placed the order before March.",o:["provided that","in case of","due to","despite"],a:0,e:"<code>provided that</code> + mệnh đề = với điều kiện là. Ba lựa chọn còn lại đều là giới từ, phải theo sau bởi danh từ."},
+{p:5,c:"Liên từ",s:"Neither the manager ___ the assistant was available for comment.",o:["or","nor","and","but"],a:1,e:"Cặp cố định <code>neither ... nor</code>. Chú ý động từ chia theo danh từ gần nhất: <code>assistant</code> số ít → <code>was</code>."},
+/* ---- Pronouns / relatives ---- */
+{p:5,c:"Đại từ & MĐQH",s:"The employees ___ attended the workshop reported higher productivity.",o:["who","which","whose","whom"],a:0,e:"Tiền ngữ là người (<code>employees</code>) và chỗ trống làm chủ ngữ của <code>attended</code> → <code>who</code>."},
+{p:5,c:"Đại từ & MĐQH",s:"The proposal, ___ details were revised last week, will be presented tomorrow.",o:["which","that","whose","who"],a:2,e:"<code>whose</code> chỉ sở hữu, dùng được cho cả người lẫn vật: «bản đề xuất mà CHI TIẾT CỦA NÓ vừa được sửa»."},
+{p:5,c:"Đại từ & MĐQH",s:"Each department must submit ___ own budget forecast.",o:["their","its","it's","theirs"],a:1,e:"<code>Each</code> luôn kéo theo số ít → <code>its</code>. <code>it's</code> là viết tắt của <code>it is</code>, không phải sở hữu."},
+{p:5,c:"Đại từ & MĐQH",s:"The training session, ___ was scheduled for Tuesday, has been postponed.",o:["who","which","what","whose"],a:1,e:"Mệnh đề quan hệ không xác định (có dấu phẩy) cho vật → <code>which</code>. Sau dấu phẩy không bao giờ dùng <code>that</code>."},
+{p:5,c:"Đại từ & MĐQH",s:"The team completed the project ___, without any outside assistance.",o:["they","them","their","themselves"],a:3,e:"Đại từ phản thân nhấn mạnh «tự mình làm». Câu đã đủ chủ ngữ và tân ngữ nên chỗ trống chỉ có thể là thành phần nhấn mạnh."},
+/* ---- Vocabulary ---- */
+{p:5,c:"Từ vựng",s:"The manager asked the team to ___ the deadline by one week.",o:["extend","expand","enlarge","lengthen"],a:0,e:"<code>extend a deadline</code> là cụm chuẩn trong tiếng Anh công sở. <code>expand</code> dùng cho quy mô kinh doanh, <code>enlarge</code> cho kích thước vật lý."},
+{p:5,c:"Từ vựng",s:"All visitors must ___ with the building's security procedures.",o:["obey","comply","follow","observe"],a:1,e:"Chỉ <code>comply</code> đi với <code>with</code>. <code>obey</code>, <code>follow</code>, <code>observe</code> đều là ngoại động từ, không cần giới từ."},
+{p:5,c:"Từ vựng",s:"The company plans to ___ its operations into Southeast Asia.",o:["increase","expand","extend","raise"],a:1,e:"<code>expand operations into + thị trường</code>. <code>increase</code> và <code>raise</code> dùng cho con số, không dùng cho phạm vi địa lý."},
+{p:5,c:"Từ vựng",s:"Please ___ the attached document before the meeting.",o:["review","overlook","oversee","look"],a:0,e:"<code>review</code> = xem lại. Bẫy: <code>overlook</code> nghĩa ngược hẳn — bỏ sót; <code>oversee</code> = giám sát."},
+{p:5,c:"Từ vựng",s:"The new regulations will take ___ on January 1.",o:["affect","effect","effective","effectively"],a:1,e:"<code>take effect</code> = có hiệu lực. Nhớ: <code>affect</code> là động từ, <code>effect</code> là danh từ."},
+{p:5,c:"Từ vựng",s:"Sales figures for the third quarter ___ expectations.",o:["exceeded","excelled","excessive","exception"],a:0,e:"<code>exceed expectations</code> = vượt kỳ vọng. <code>excel</code> phải đi với <code>at/in</code>."},
+{p:5,c:"Từ vựng",s:"The IT department will ___ the software update overnight.",o:["carry","perform","make","do"],a:1,e:"<code>perform an update</code>. Nếu muốn dùng <code>carry</code> thì phải là <code>carry out</code>."},
+/* ---- Comparison & misc ---- */
+{p:5,c:"So sánh & khác",s:"This year's revenue is significantly ___ than last year's.",o:["high","higher","highest","highly"],a:1,e:"Có <code>than</code> → so sánh hơn. Thấy <code>than</code> là gần như chắc chắn chọn dạng <code>-er</code> hoặc <code>more</code>."},
+{p:5,c:"So sánh & khác",s:"Of all the applicants, Ms. Chen had the ___ experience.",o:["much","more","most","many"],a:2,e:"<code>Of all...</code> + <code>the</code> → so sánh nhất trong một nhóm."},
+{p:5,c:"So sánh & khác",s:"The sooner we finalize the contract, the ___ we can begin production.",o:["soon","sooner","soonest","more soon"],a:1,e:"Cấu trúc <code>the + so sánh hơn, the + so sánh hơn</code> = càng… càng… Cả hai vế đều phải ở dạng so sánh hơn."},
+{p:5,c:"So sánh & khác",s:"There are ___ applicants for this position than we expected.",o:["fewer","less","little","few"],a:0,e:"<code>applicants</code> đếm được → <code>fewer</code>. <code>less</code> chỉ dùng cho danh từ không đếm được."},
+{p:5,c:"So sánh & khác",s:"The manager insisted that every report ___ proofread before submission.",o:["is","be","was","will be"],a:1,e:"Thức giả định: sau <code>insist / recommend / require / suggest that</code>, động từ luôn ở dạng nguyên thể không <code>to</code>, bất kể chủ ngữ. Ở đây thêm bị động → <code>be proofread</code>."},
+{p:5,c:"So sánh & khác",s:"___ of the two proposals meets our budget requirements.",o:["Both","All","Neither","None"],a:2,e:"Động từ <code>meets</code> số ít nên loại <code>Both</code> và <code>All</code>. Với đúng HAI thứ thì dùng <code>Neither</code>, ba thứ trở lên mới dùng <code>None</code>."},
+/* ---- Part 6: passage 1 ---- */
+{p:6,c:"Part 6 — Thông báo",
+ t:"To: All Staff\nFrom: Facilities Management\nRe: Parking Garage Maintenance\n\nThe east parking garage will be closed for resurfacing from Monday, April 6, through Friday, April 10. During this period, employees who normally park there should use the west lot ①.\n\nWe apologize for any inconvenience. The west lot has ② spaces to accommodate all affected vehicles, but we recommend arriving fifteen minutes earlier than usual during the first two days.\n\n③ Shuttle service between the west lot and the main entrance will run every ten minutes from 7:00 a.m. to 9:30 a.m.\n\nQuestions may be ④ to facilities@company.com.",
+ b:"①", s:"Chỗ trống ①", o:["instead","however","therefore","besides"],a:0,e:"«Bãi đông đóng cửa, hãy dùng bãi tây THAY VÀO ĐÓ» → <code>instead</code>. Part 6 khác Part 5 ở chỗ phải đọc câu trước mới chọn được từ nối."},
+{p:6,c:"Part 6 — Thông báo", b:"②", s:"Chỗ trống ②", o:["sufficient","sufficiently","sufficiency","suffice"],a:0,e:"Trước danh từ <code>spaces</code> → tính từ <code>sufficient</code> = đủ chỗ."},
+{p:6,c:"Part 6 — Chèn câu", b:"③", s:"Chỗ trống ③ — chọn câu điền vào",o:["The garage will reopen on Saturday, April 11.","We have arranged additional transportation to reduce walking time.","Parking fees will increase beginning next month.","Please submit your vehicle registration by Friday."],a:1,e:"Câu NGAY SAU chỗ trống nói về xe đưa đón mười phút một chuyến. Chỉ đáp án B dẫn vào ý đó. Dạng chèn câu luôn giải bằng cách đọc câu liền trước và liền sau, không đọc cả bài."},
+{p:6,c:"Part 6 — Thông báo", b:"④", s:"Chỗ trống ④", o:["direct","directed","directing","direction"],a:1,e:"<code>may be + V3</code> → bị động: «thắc mắc có thể được gửi tới…»."},
+/* ---- Part 6: passage 2 ---- */
+{p:6,c:"Part 6 — Email",
+ t:"Dear Mr. Petrov,\n\nThank you for your interest in our enterprise software package. I have attached a detailed quotation ① your request.\n\nThe quoted price includes twelve months of technical support and two on-site training sessions. ②, we can extend the support period to twenty-four months for an additional fee.\n\n③ Once we receive your confirmation, our implementation team will contact you within three business days to schedule the installation.\n\nPlease note that the quoted rates are valid ④ May 31.\n\nBest regards,\nElena Marchetti\nAccount Manager",
+ b:"①", s:"Chỗ trống ①", o:["by","per","on","about"],a:1,e:"<code>per your request</code> = theo yêu cầu của ông — cụm chuẩn trong email thương mại."},
+{p:6,c:"Part 6 — Email", b:"②", s:"Chỗ trống ②", o:["Nevertheless","If desired","Consequently","In the meantime"],a:1,e:"Câu này đưa ra một lựa chọn THÊM chứ không tương phản hay kết luận → <code>If desired</code> = nếu ông muốn."},
+{p:6,c:"Part 6 — Chèn câu", b:"③", s:"Chỗ trống ③ — chọn câu điền vào",o:["Our office will be closed during the holiday period.","Please review the attached document and let me know if you would like to proceed.","We regret that we cannot accommodate your request at this time.","The training sessions will be conducted in Russian."],a:1,e:"Câu sau bắt đầu bằng <code>Once we receive your confirmation</code> — vậy trước đó phải có lời mời xác nhận. Đáp án C còn mâu thuẫn hẳn với cả email đang báo giá."},
+{p:6,c:"Part 6 — Email", b:"④", s:"Chỗ trống ④", o:["until","by","since","from"],a:0,e:"<code>valid until + ngày</code> = có hiệu lực đến hết ngày đó. <code>by</code> là hạn chót để LÀM việc gì, không dùng cho hiệu lực kéo dài."},
+/* ---- Part 7: bài đơn — email chăm sóc khách hàng ---- */
+{p:7,c:"Part 7 — Mục đích",pas:"A",s:"Why did Ms. Osei write the email?",o:["To confirm that an order has been delivered","To explain a shipping delay and offer options","To request payment for an outstanding invoice","To advertise a new product line"],a:1,e:"Câu hỏi mục đích thì đọc đoạn đầu và đoạn cuối là đủ. Toàn thư xoay quanh việc giao chậm rồi đưa ra hai lựa chọn: nhận bù 15% hoặc huỷ đơn. Đáp án A sai vì hàng CHƯA tới."},
+{p:7,c:"Part 7 — Chi tiết",pas:"A",s:"What is indicated about the order?",o:["It was placed on 3 May","It contains twelve items","It was cancelled by the customer","It will be delivered on 7 May"],a:1,e:"<code>twelve ergonomic chairs</code> → 12 món. Bẫy ngày tháng: 28/4 là ngày ĐẶT, 3/5 là ngày XUẤT KHO, 7/5 là ngày dự kiến CŨ, 12/5 mới là ngày mới. Part 7 luôn rải nhiều mốc để bẫy người đọc lướt."},
+{p:7,c:"Part 7 — Chèn câu",pas:"A",s:"In which of the positions marked [1], [2], [3] and [4] does the following sentence best belong?<br><span class=\"serif\" style=\"font-size:15px\">“We have also asked the carrier to prioritise your delivery once the roads reopen.”</span>",o:["[1]","[2]","[3]","[4]"],a:2,e:"Chữ <code>also</code> cho biết trước đó đã có MỘT biện pháp khắc phục rồi. Biện pháp đó là khoản bù 15% ở đoạn ngay trên [3]. Đặt vào [1] hay [2] thì <code>also</code> không có gì để nối tiếp."},
+{p:7,c:"Part 7 — Từ trong ngữ cảnh",pas:"A",s:"The word “gesture” in paragraph 3 is closest in meaning to",o:["movement","signal","action","suggestion"],a:2,e:"<code>a gesture of goodwill</code> = một hành động thiện chí. Dạng câu này luôn hỏi nghĩa TRONG CÂU ĐÓ, không phải nghĩa phổ biến nhất của từ — <code>gesture</code> thường là «cử chỉ tay» nhưng ở đây không phải."},
+/* ---- Part 7: bài đơn — thông báo khoá học ---- */
+{p:7,c:"Part 7 — Chi tiết",pas:"B",s:"What is required of all employees who wish to attend?",o:["Payment of a registration fee","Approval from a line manager","At least one year of service","A laptop"],a:1,e:"<code>Employees must obtain their line manager's approval</code>. Đáp án A sai vì khoá học miễn phí; D chỉ áp dụng cho một buổi."},
+{p:7,c:"Part 7 — Chi tiết",pas:"B",s:"Which session has a restricted audience?",o:["Data Visualisation Basics","Negotiation for Project Leads","Written Communication in English","All three sessions"],a:1,e:"<code>Open to staff at team-lead level and above</code> — chỉ buổi này giới hạn cấp bậc, lại còn giới hạn 15 người."},
+{p:7,c:"Part 7 — Suy luận",pas:"B",s:"What is suggested about Priya Raman?",o:["She works for an external consultancy","She will lead more than one session","She is a project lead","She designed the intranet form"],a:1,e:"Tên bà xuất hiện ở cả buổi 1 và buổi 3. Đáp án A là bẫy: người ngoài công ty là ông Ferreira. Câu <code>suggested</code> luôn đòi ghép hai chi tiết rời chứ không có sẵn một câu trả lời thẳng."},
+{p:7,c:"Part 7 — Chi tiết",pas:"B",s:"What will happen to an employee who registers but does not attend?",o:["The employee will be removed from future sessions","The employee's department will be charged a fee","The employee must reapply through a manager","Nothing will happen"],a:1,e:"<code>a £40 no-show fee to their department budget</code> — phí tính vào ngân sách PHÒNG BAN chứ không phải cá nhân. Part 7 hay đổi chủ thể như vậy."},
+/* ---- Part 7: bài kép — tin tuyển dụng + email ứng tuyển ---- */
+{p:7,c:"Part 7 — Bài kép",pas:"C",s:"What is indicated about the position?",o:["It is fully remote","It requires attendance at the office three days a week","It is a temporary contract","It is based in Manchester"],a:1,e:"<code>hybrid, three days on site</code>. Manchester là nơi ứng viên đang ở, không phải nơi làm việc — bẫy trộn thông tin giữa hai bài."},
+{p:7,c:"Part 7 — Bài kép",pas:"C",s:"Which requirement does Mr. Okonkwo exceed?",o:["The required degree field","The minimum database experience","The written English requirement","The work permit requirement"],a:1,e:"Đây là câu ĐỐI CHIẾU — phải ghép hai bài mới trả lời được. Tin tuyển đòi <code>at least one year</code>, email nói <code>eighteen months</code> → vượt yêu cầu. Bằng cấp và giấy phép lao động chỉ là ĐẠT, không phải vượt."},
+{p:7,c:"Part 7 — Bài kép",pas:"C",s:"What desirable qualification does Mr. Okonkwo mention?",o:["Knowledge of warehouse management systems","Experience with Power BI","A postgraduate qualification","Experience managing a team"],a:1,e:"Tin tuyển xếp Power BI vào mục <code>Desirable</code>, và email có nhắc. Ứng viên KHÔNG nhắc gì tới warehouse management system — câu A là bẫy lấy từ mục Desirable nhưng không có trong email."},
+{p:7,c:"Part 7 — Bài kép",pas:"C",s:"According to the advertisement, what does Mr. Okonkwo NOT need to do?",o:["Attend a technical assessment","Quote a reference number","State that he lacks a work permit","Send a CV"],a:2,e:"Tin tuyển ghi: người KHÔNG có giấy phép lao động mới phải khai. Ông Okonkwo có giấy phép nên không cần. Dạng câu <code>NOT</code> phải kiểm từng đáp án — ba cái kia đều có thật trong tin."},
+{p:7,c:"Part 7 — Từ trong ngữ cảnh",pas:"C",s:"In the advertisement, the word “quoting” is closest in meaning to",o:["repeating aloud","citing","pricing","estimating"],a:1,e:"<code>quoting reference JSA-06</code> = ghi kèm mã số tham chiếu → <code>citing</code>. Bẫy nằm ở nghĩa thương mại quen thuộc của <code>quote</code> là «báo giá» (C, D), nhưng ngữ cảnh đây là mã hồ sơ."},
+];
+
+const KEY = "toeic700.v1";
+const $ = id => document.getElementById(id);
+let idx = 0, right = 0, answered = false, mode = "practice", stats = {}, examAnswers = [], timerId = null, left = 40 * 60;
+
+function load(){ try{ const r = localStorage.getItem(KEY); if(r) stats = JSON.parse(r) || {}; }catch(e){ stats = {}; } }
+function persist(){ try{ localStorage.setItem(KEY, JSON.stringify(stats)); }catch(e){} }
+load();
+
+function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+function passageHTML(q){
+  if(q.pas){
+    /* Part 7: bài đọc dùng chung, giữ nguyên trên màn hình suốt cả nhóm câu. */
+    return '<div class="pair">' + PASSAGES[q.pas].map(p =>
+      '<p class="plabel">' + p.l + '</p><pre class="passage">' +
+      esc(p.t).replace(/\[(\d)\]/g, '<i>[$1]</i>') + '</pre>').join("") + '</div>';
+  }
+  if(!q.t) return "";
+  const marked = esc(q.t).replace(/[①②③④]/g, m => m === q.b ? "<b>"+m+"</b>" : m);
+  return '<pre class="passage">' + marked + '</pre>';
+}
+
+function render(){
+  const q = Q[idx];
+  $("s-pos").textContent = idx + 1;
+  $("s-total").textContent = Q.length;
+  $("s-right").textContent = right;
+  $("bar").style.width = ((idx) / Q.length * 100) + "%";
+
+  const stem = (q.t || q.pas)
+    ? '<div class="stem">' + q.s + '</div>'
+    : '<div class="stem">' + q.s.replace("___", "<u></u>") + '</div>';
+
+  $("card").innerHTML =
+    '<div class="qhead"><span class="qnum">' + ("PART " + q.p) +
+    ' · CÂU ' + String(idx + 1).padStart(2, "0") + '</span><span class="qtag">' + q.c + '</span></div>' +
+    passageHTML(q) + stem +
+    '<div class="opts">' + q.o.map((t, i) =>
+      '<button class="opt" data-i="' + i + '"><span class="letter">' +
+      "ABCD"[i] + '</span><span class="text">' + t + '</span></button>').join("") +
+    '</div><div id="why"></div>';
+
+  answered = false;
+  $("next").textContent = idx === Q.length - 1 ? "Xem kết quả" : "Câu tiếp theo";
+  $("skip").disabled = false;
+  document.querySelectorAll(".opt").forEach(b => b.addEventListener("click", () => choose(+b.dataset.i)));
+  drawCats();
+}
+
+function choose(i){
+  if(answered) return;
+  answered = true;
+  const q = Q[idx], ok = i === q.a;
+  const opts = document.querySelectorAll(".opt");
+  opts.forEach(b => b.disabled = true);
+
+  if(mode === "exam"){
+    opts[i].dataset.state = "picked";
+    examAnswers[idx] = i;
+    if(ok) right++;
+    $("s-right").textContent = right;
+    setTimeout(nextQ, 180);
+    return;
+  }
+
+  opts[q.a].dataset.state = "correct";
+  if(!ok) opts[i].dataset.state = "wrong";
+  if(ok) right++;
+  $("s-right").textContent = right;
+
+  const st = stats[q.c] || {n:0, k:0};
+  st.n++; if(ok) st.k++;
+  stats[q.c] = st; persist();
+
+  $("why").innerHTML =
+    '<div class="why ' + (ok ? "ok" : "no") + '"><div class="verdict">' +
+    (ok ? "Đúng" : "Sai — đáp án là (" + "ABCD"[q.a] + ") " + q.o[q.a]) +
+    '</div><p>' + q.e + '</p></div>';
+  drawCats();
+  $("next").focus();
+}
+
+function nextQ(){
+  if(idx < Q.length - 1){ idx++; render(); window.scrollTo({top:0, behavior:"smooth"}); }
+  else finish();
+}
+
+function finish(){
+  stopTimer();
+  const pct = Math.round(right / Q.length * 100);
+  // Ước lượng thô: quy tỉ lệ đúng Part 5–6 về thang Reading 5–495 rồi nhân đôi cho tổng.
+  const reading = Math.max(5, Math.min(495, Math.round(pct * 4.6 + 30)));
+  const total = Math.min(990, reading * 2);
+  $("result").hidden = false;
+  $("result").innerHTML =
+    '<h2>Kết quả</h2><div class="big">' + right + "/" + Q.length + " · " + pct + '%</div>' +
+    '<p>Ước lượng Reading khoảng <b>' + reading + '</b>, tổng khoảng <b>' + total +
+    '</b>. Đây chỉ là con số theo dõi tiến bộ — bộ này phủ Part 5, 6, 7 nhưng phần Listening chiếm một nửa số điểm bài thi thật.</p>' +
+    '<p>Mốc TMA cần là 700. Xem bảng chủ điểm bên dưới, học lại những thanh màu đỏ rồi làm lại.</p>';
+  $("bar").style.width = "100%";
+  $("result").scrollIntoView({behavior:"smooth", block:"nearest"});
+}
+
+function drawCats(){
+  const keys = Object.keys(stats);
+  if(!keys.length){ $("cats").innerHTML = '<p class="empty">Làm vài câu để xem thống kê.</p>'; return; }
+  $("cats").innerHTML = keys.sort((a,b) => (stats[a].k/stats[a].n) - (stats[b].k/stats[b].n))
+    .map(k => {
+      const s = stats[k], p = Math.round(s.k / s.n * 100);
+      return '<div class="cat" data-weak="' + (p < 70 ? 1 : 0) + '">' +
+        '<span class="cat-name">' + k + '</span>' +
+        '<span class="track"><i style="width:' + p + '%"></i></span>' +
+        '<span class="cat-val">' + s.k + "/" + s.n + '</span></div>';
+    }).join("");
+}
+
+function setMode(m){
+  mode = m;
+  $("m-practice").setAttribute("aria-pressed", m === "practice");
+  $("m-exam").setAttribute("aria-pressed", m === "exam");
+  idx = 0; right = 0; examAnswers = []; $("result").hidden = true;
+  stopTimer();
+  if(m === "exam"){ left = 40 * 60; $("s-timer-wrap").hidden = false; tick(); timerId = setInterval(tick, 1000); }
+  else $("s-timer-wrap").hidden = true;
+  render();
+}
+function tick(){
+  const m = String(Math.floor(left / 60)).padStart(2, "0"), s = String(left % 60).padStart(2, "0");
+  $("s-timer").textContent = m + ":" + s;
+  if(left-- <= 0) finish();
+}
+function stopTimer(){ if(timerId){ clearInterval(timerId); timerId = null; } }
+
+$("next").addEventListener("click", nextQ);
+$("skip").addEventListener("click", nextQ);
+$("m-practice").addEventListener("click", () => setMode("practice"));
+$("m-exam").addEventListener("click", () => setMode("exam"));
+$("m-reset").addEventListener("click", () => { stats = {}; persist(); setMode(mode); });
+document.addEventListener("keydown", e => {
+  if(e.target.tagName === "INPUT") return;
+  const k = e.key.toUpperCase(), i = "ABCD".indexOf(k);
+  if(i >= 0 && !answered){ choose(i); e.preventDefault(); }
+  else if(e.key === "Enter"){ nextQ(); e.preventDefault(); }
+});
+
+render();
+</script>
