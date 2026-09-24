@@ -3,6 +3,8 @@
 Bộ luyện TOEIC Reading — **64 câu Part 5, 6 và 7**, giải thích bằng tiếng Việt,
 theo dõi điểm yếu theo chủ điểm ngữ pháp.
 
+**Dùng thử: https://nguyenquocanhz.github.io/toeic-700/**
+
 Một file HTML duy nhất, không build, không phụ thuộc thư viện ngoài. Mở bằng
 trình duyệt là chạy.
 
